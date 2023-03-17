@@ -5,9 +5,7 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Rover;
 import com.codecool.marsexploration.data.SimulationInput;
 import com.codecool.marsexploration.logic.ExplorationSimulator;
-import com.codecool.marsexploration.logic.phase.Movement;
 import com.codecool.marsexploration.logic.phase.Phase;
-import com.codecool.marsexploration.logic.phase.Scan;
 
 import java.util.List;
 
@@ -15,8 +13,12 @@ public class Application {
     public static void main(String[] args) {
         long timeout = 100;
         Coordinate landingSpot = new Coordinate(12, 12);
-        String[][] mapDummy = new String[100][100];
+        Rover rover = new Rover("Opportunity", landingSpot, 3);
 
+
+
+
+        String[][] mapDummy = new String[100][100];
         mapDummy[8][12] = "*";
         mapDummy[16][12] = "*";
         mapDummy[12][8] = "*";
@@ -26,11 +28,9 @@ public class Application {
         mapDummy[16][8] = "*";
         mapDummy[8][16] = "*";
 
-
-
-        Rover rover = new Rover("Opportunity", landingSpot, 3);
-
-        Context context = new Context(timeout, mapDummy, landingSpot, rover);
+        int mineralsNeededForColonization = 3;
+        int waterNeededForColonization = 2;
+        Context context = new Context(timeout, mapDummy, landingSpot, rover, mineralsNeededForColonization, waterNeededForColonization);
 
         List<Phase> phaseList = new PhaseLoader().loadPhases();
         StepManager manager = new StepManager(phaseList);

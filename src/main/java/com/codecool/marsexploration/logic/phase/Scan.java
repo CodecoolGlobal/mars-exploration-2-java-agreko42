@@ -9,8 +9,9 @@ import java.util.*;
 public class Scan implements Phase{
     @Override
     public void perform(Context context) {
-        //get Coordinates around the rover within its sight, scan, and update context
+
         Coordinate currentPosition = context.rover.position;
+
         Set<Coordinate> surroundings = getSurroundings(currentPosition, context.rover.sightRange);
 
         scanSurroundings(context.map, surroundings, context.rover.interestingStuffIFound);
