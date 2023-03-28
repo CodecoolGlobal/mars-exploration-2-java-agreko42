@@ -2,19 +2,20 @@ package com.codecool.marsexploration.logic.phase;
 
 import com.codecool.marsexploration.data.Context;
 import com.codecool.marsexploration.data.Coordinate;
+import com.codecool.marsexploration.data.Rover;
 
 import javax.swing.*;
 import java.util.*;
 
 public class Scan implements Phase{
     @Override
-    public void perform(Context context) {
+    public void perform(Context context, Rover rover) {
 
-        Coordinate currentPosition = context.rover.position;
+        Coordinate currentPosition = rover.getPosition();
 
-        Set<Coordinate> surroundings = getSurroundings(currentPosition, context.rover.sightRange);
+        Set<Coordinate> surroundings = getSurroundings(currentPosition, rover.getSightRange());
 
-        scanSurroundings(context.map, surroundings, context.rover.interestingStuffIFound);
+        scanSurroundings(context.getMap(), surroundings, rover.getInterestingStuffIFound());
 
     }
 
@@ -63,12 +64,5 @@ public class Scan implements Phase{
             interestingStuff.put(mapSymbol, new HashSet<>());
             interestingStuff.get(mapSymbol).add(coordinate);
         }
-        if(mapSymbol != null) {
-            System.out.println("The rover found and remembered a " + mapSymbol + " at X:" + coordinate.x() + " Y:" + coordinate.y());
-            System.out.println("Number of remembered " + mapSymbol + ": " + interestingStuff.get(mapSymbol).size());
-        }
     }
-
-
-
 }

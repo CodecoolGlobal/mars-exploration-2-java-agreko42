@@ -5,28 +5,30 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Outcome;
 import com.codecool.marsexploration.data.Symbol;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 public class ColonizabilityAnalyzer implements Analyzer{
     @Override
-    public Optional<Outcome> analyze(Context context) {
-/*        boolean isColonizable ()  {
-            Map<String, Set<Coordinate>> stuff = context.rover.interestingStuffIFound;
-            for(String mapSymbol : stuff.keySet()){
-                stuff.get(mapSymbol).size()
-            }
-        }*/
-        Map<String, Set<Coordinate>> stuff = context.rover.interestingStuffIFound;
-        boolean isColonizable =
-                stuff.get(Symbol.MINERAL.getSymbol()).size() >= context.MINERALS_NEEDED_FOR_COLONIZATION
-                && stuff.get(Symbol.WATER.getSymbol()).size() >= context.WATER_NEEDED_FOR_COLONIZATION
-                && stuff.get(Symbol.ALIEN.getSymbol()).size() == 0;
-        if(isColonizable){
-            return Optional.of(Outcome.COLONIZABLE);
-        }
-        else{return null;
+    public void analyze(Context context, Map<String, Set<Coordinate>> stuffFound) {
+        if(isColonizable(context, stuffFound)){
+            context.setSimulationOutcome(Outcome.COLONIZABLE);
         }
     }
+    private boolean isColonizable (Context context, Map<String, Set<Coordinate>> stuffFound)  {
+        boolean enoughMinerals = false;
+        boolean enoughWater = false;
+
+        for(String mapSymbol : stuffFound.keySet()) {
+            if( mapSymbol != null && mapSymbol.equals(Symbol.MINERAL.getSymbol()) ) {
+                enoughMinerals = stuffFound.get(mapSymbol).size() >= context.getMINERALS_NEEDED_FOR_COLONIZATION();
+            }
+            if (mapSymbol != null && mapSymbol.equals(Symbol.WATER.getSymbol())) {
+                enoughWater = stuffFound.get(mapSymbol).size() >= context.getWATER_NEEDED_FOR_COLONIZATION();
+            }
+        }
+        return enoughMinerals && enoughWater;
+    }
+
 }
