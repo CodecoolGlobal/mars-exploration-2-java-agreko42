@@ -12,12 +12,15 @@ public class Rover {
     private Map<String, Set<Coordinate>> interestingStuffIFound;
     private List<Coordinate> visitedCoordinates;
     private RoverTask currentTask;
+    private Inventory inventory;
+
 
     public Rover(String id, Coordinate position, int sightRange, Routine currentRoutine) {
         this.id = id;
         this.position = position;
         this.sightRange = sightRange;
         this.currentRoutine = currentRoutine;
+        this.inventory = new Inventory();
         this.interestingStuffIFound = new HashMap<>();
         this.visitedCoordinates = new ArrayList<>();
         visitedCoordinates.add(position);
@@ -62,5 +65,9 @@ public class Rover {
     }
     public void setCurrentTask(RoverTask currentTask) {
         this.currentTask = currentTask;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }

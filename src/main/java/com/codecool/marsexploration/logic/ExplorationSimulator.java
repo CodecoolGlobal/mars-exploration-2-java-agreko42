@@ -17,7 +17,6 @@ public class ExplorationSimulator {
     }
     public void simulate(SimulationInput input) {
 
-
         while(context.getStepNumber() < context.getTimeout()){
             System.out.println(context.getStepNumber() + " ---------------------- ---------------- --------------");
             context.getRovers().stream()

@@ -12,17 +12,15 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        long timeout = 100;
+        long timeout = 600;
         Coordinate landingSpot = new Coordinate(12, 12);
         Routine startingRoutine = new RandomExplorationRoutine();
         List<Rover> startingRovers = new ArrayList<>();
         Rover opportunity = new Rover("Opportunity", landingSpot, 3, startingRoutine);
         startingRovers.add(opportunity);
 
-
         Routine targetRoutine = new TargetedMovementRoutine();
-        startingRovers.add(new Rover("roverlyDope", new Coordinate(20,20), 3, targetRoutine));
-        startingRovers.get(1).setCurrentTask(new RoverTask(new Coordinate(50,50), "", null));
+        startingRovers.add(new Rover("roverlyDope", landingSpot, 3, startingRoutine));
 
         String[][] mapDummy = new String[100][100];
         mapDummy[8][12] = "*";
@@ -36,7 +34,8 @@ public class Application {
 
         int mineralsNeededForColonization = 3;
         int waterNeededForColonization = 2;
-        Context context = new Context(timeout, mapDummy, landingSpot, startingRovers, mineralsNeededForColonization, waterNeededForColonization);
+        int wantedNumberOfDepots = 2;
+        Context context = new Context(timeout, mapDummy, landingSpot, startingRovers, mineralsNeededForColonization, waterNeededForColonization, wantedNumberOfDepots);
 
 
         List<Phase> phaseList = new PhaseLoader().loadPhases();

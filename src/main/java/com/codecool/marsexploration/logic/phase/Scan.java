@@ -48,12 +48,23 @@ public class Scan implements Phase{
     private void scanSurroundings (String[][] map, Set<Coordinate> surroundings, Map<String,Set<Coordinate>> interestingStuff) {
 
         for(Coordinate coordinate: surroundings) {
-            int x = coordinate.x();
-            int y = coordinate.y();
+            int x = correctValueIntoBounds(map.length, coordinate.x());
+            int y = correctValueIntoBounds(map.length, coordinate.y());
             String mapSymbol = map[x][y];
+
             rememberFoundStuff(interestingStuff, coordinate, mapSymbol);
 
         }
+    }
+
+    private int correctValueIntoBounds(int max, int value) {
+        if(value < 0){
+            value = 0;
+        }
+        else if (value >= max){
+           value = max;
+        }
+        return value;
     }
 
     private void rememberFoundStuff(Map<String, Set<Coordinate>> interestingStuff, Coordinate coordinate, String mapSymbol) {

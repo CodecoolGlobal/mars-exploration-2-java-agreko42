@@ -17,6 +17,7 @@ public class PhaseLoader {
         phaseList.add(new Scan());
         phaseList.add(loadAnalyzers());
         phaseList.add(new Log());
+        phaseList.add(new TaskManager());
 
         phaseList.add(new StepIncrement()); //must be LAST
         return phaseList;

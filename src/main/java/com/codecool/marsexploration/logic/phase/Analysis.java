@@ -5,6 +5,7 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Outcome;
 import com.codecool.marsexploration.data.Rover;
 import com.codecool.marsexploration.logic.analyzer.Analyzer;
+import com.codecool.marsexploration.logic.getEverythingFound;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,16 +18,6 @@ public class Analysis implements Phase{
     }
     @Override
     public void perform(Context context, Rover rover) {
-        Map<String, Set<Coordinate>> allStuffFound = new HashMap<>();
-
-        context.getRovers().stream()
-                .peek(thisRover -> thisRover.getInterestingStuffIFound().keySet().stream()
-                                .peek(key -> {
-                                    allStuffFound.put(key, new HashSet<>());
-                                    allStuffFound.get(key).addAll(thisRover.getInterestingStuffIFound().get(key));
-                                })
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
 
   /*      for(String mapSymbol : allStuffFound.keySet()){
             System.out.println("Coordinates for " + mapSymbol + ": " );
@@ -35,6 +26,7 @@ public class Analysis implements Phase{
             }
         }*/
 
+        Map<String, Set<Coordinate>> allStuffFound = new getEverythingFound().get(context);
         for(Analyzer analyzer : allAnalyzer){
             analyzer.analyze(context, allStuffFound);
         }
