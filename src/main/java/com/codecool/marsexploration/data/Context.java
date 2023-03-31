@@ -9,21 +9,27 @@ public class Context {
     private String [][] map;
     private Coordinate landingCoordinate;
     private List<Rover> rovers;
+    private List<Housing> housings;
     private List<Depot> depots;
     private final int MINERALS_NEEDED_FOR_COLONIZATION;
     private final int WATER_NEEDED_FOR_COLONIZATION;
+    private final int NEEDED_HOUSING;
     private final int WANTED_NUMBER_OF_DEPOTS;
+    private final Outcome WANTED_OUTCOME;
     private Outcome simulationOutcome;
-    public Context(long timeout, String[][] map, Coordinate landingCoordinate, List<Rover> rovers, int mineralsNeededForColonization, int waterNeededForColonization, int wantedNumberOfDepots) {
+    public Context(long timeout, String[][] map, Coordinate landingCoordinate, List<Rover> rovers, int mineralsNeededForColonization, int waterNeededForColonization, int neededHousing, int wantedNumberOfDepots, Outcome wantedOutcome) {
         MINERALS_NEEDED_FOR_COLONIZATION = mineralsNeededForColonization;
         WATER_NEEDED_FOR_COLONIZATION = waterNeededForColonization;
+        NEEDED_HOUSING = neededHousing;
         WANTED_NUMBER_OF_DEPOTS = wantedNumberOfDepots;
+        WANTED_OUTCOME = wantedOutcome;
         this.stepNumber = 0;
         this.timeout = timeout;
         this.map = map;
         this.landingCoordinate = landingCoordinate;
         this.rovers = rovers;
         this.depots = new ArrayList<>();
+        this.housings = new ArrayList<>();
     }
 
     public int getStepNumber() {
@@ -59,8 +65,9 @@ public class Context {
     public List<Depot> getDepots() {
         return depots;
     }
-    public void addToDepots(Depot depot) {
-        this.depots.add(depot);
+
+    public List<Housing> getHousings() {
+        return housings;
     }
     public int getMINERALS_NEEDED_FOR_COLONIZATION() {
         return MINERALS_NEEDED_FOR_COLONIZATION;
@@ -71,7 +78,12 @@ public class Context {
     public int getWANTED_NUMBER_OF_DEPOTS() {
         return WANTED_NUMBER_OF_DEPOTS;
     }
-
+    public int getNEEDED_HOUSING() {
+        return NEEDED_HOUSING;
+    }
+    public Outcome getWANTED_OUTCOME() {
+        return WANTED_OUTCOME;
+    }
     public Outcome getSimulationOutcome() {
         return simulationOutcome;
     }

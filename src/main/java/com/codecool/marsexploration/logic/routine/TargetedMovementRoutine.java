@@ -7,12 +7,13 @@ import com.codecool.marsexploration.data.Rover;
 public class TargetedMovementRoutine implements Routine{
     @Override
     public void move(Context context, Rover rover) {
+        System.out.println("TRYING TO MOVE TO TARGET");
         Coordinate target = rover.getCurrentTask().getTarget();
         int currentX = rover.getPosition().x();
         int currentY = rover.getPosition().y();
         int targetX = target.x();
         int targetY = target.y();
-        if(targetX != currentX || targetY != currentY){
+        if(targetX != currentX || targetY != currentY) {
             Coordinate nextPosition = new Coordinate(
                     correctThisPosition(targetX, currentX),
                     correctThisPosition(targetY, currentY)
@@ -22,10 +23,10 @@ public class TargetedMovementRoutine implements Routine{
     }
     public int correctThisPosition(int target, int current ){
         System.out.println("Rover tries to correct");
-        if(target < current){
+        if(current > target){
             current -= 1;
         }
-        else if(target > current) {
+        else if(current < target) {
             current += 1;
         }
         return current;

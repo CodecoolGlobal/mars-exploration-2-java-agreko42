@@ -1,9 +1,6 @@
 package com.codecool.marsexploration.logic.phase;
 
-import com.codecool.marsexploration.data.Context;
-import com.codecool.marsexploration.data.Outcome;
-import com.codecool.marsexploration.data.Rover;
-import com.codecool.marsexploration.data.RoverTask;
+import com.codecool.marsexploration.data.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -33,20 +30,36 @@ public class Log implements Phase{
         String positionX = String.valueOf(rover.getPosition().x());
         String positionY = String.valueOf(rover.getPosition().y());
         String task = getTaskString(rover.getCurrentTask());
+        String numberOfDepots = String.valueOf(context.getDepots().size());
+        String numberOfHouses = String.valueOf(context.getHousings().size());
+        String depotsFull = getDepotsFullString(context);
 
         String outputString =
                 "STEP " + stepNumber + "; " +
                 "UNIT " + unit + "; " +
                 "POSITION " + "[" + positionX + "," + positionY + "]" + "; "+
                 "CURRENT TASK: " + task + ";" +
-                "CURRENT ROUTINE " + rover.getCurrentRoutine().getClass().getName() + "; " +
+                //"CURRENT ROUTINE " + rover.getCurrentRoutine().getClass().getName() + "; " +
                 "OUTCOME: " + outcome + "; " +
+                "DEPOTS: " + numberOfDepots + "; " +
+                "Houses: " + numberOfHouses + "; " +
                 """
                         
                 """;
         return outputString;
     }
+    private String getDepotsFullString(Context context) {
 
+            for(Depot depot : context.getDepots()){
+                for(Symbol key : depot.getInventory().getInventory().keySet()) {
+                    if(!depot.getInventory().isFull(key)){
+                        return "--Depots not filled completely";
+                    }
+                }
+            }
+            return "-- All Depots filled";
+
+    }
     private String getEventString(Outcome outcome) {
         if(outcome != null){
             return outcome.toString();
@@ -57,7 +70,7 @@ public class Log implements Phase{
     }
     private String getTaskString(RoverTask task){
         if(task != null){
-            return task.getAction();
+            return task.getAction().toString();
         }
         else{
             return "none";

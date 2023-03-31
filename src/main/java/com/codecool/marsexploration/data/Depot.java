@@ -7,26 +7,22 @@ public class Depot {
     public String id;
     public Coordinate location;
     public boolean isFull;
-    public Map<String, Integer> resourcesOnStock;
+    public Inventory inventory;
 
-    public Depot(String id, Coordinate location, boolean isFull) {
+    public Depot(String id, Coordinate location, Inventory inventory) {
         this.id = id;
         this.location = location;
-        this.isFull = isFull;
-        this.resourcesOnStock = new HashMap<>();
+        this.inventory = inventory;
     }
 
     public String getId() {
         return id;
     }
-
+    public Inventory getInventory() {
+        return inventory;
+    }
     public Coordinate getLocation() {
         return location;
     }
-    public Map<String, Integer> getResourcesOnStock() {
-        return resourcesOnStock;
-    }
-    public void setResourcesOnStock(Map<String, Integer> resourcesOnStock) {
-        this.resourcesOnStock = resourcesOnStock;
-    }
+
 }

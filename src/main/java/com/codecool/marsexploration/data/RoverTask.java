@@ -6,13 +6,13 @@ import java.util.OptionalInt;
 public class RoverTask {
 
     private Coordinate target;
-    private String action;
+    private final Action action;
     private int duration;
 
-    public RoverTask(Coordinate target, String action, int duration) {
+    public RoverTask(Coordinate target, Action action) {
         this.target = target;
         this.action = action;
-        this.duration = duration;
+        this.duration = action.getDuration();
     }
 
     public Coordinate getTarget() {
@@ -21,11 +21,8 @@ public class RoverTask {
     public void setTarget(Coordinate target) {
         this.target = target;
     }
-    public String getAction() {
+    public Action getAction() {
         return action;
-    }
-    public void setAction(String action) {
-        this.action = action;
     }
     public int getDuration() {
         return duration;

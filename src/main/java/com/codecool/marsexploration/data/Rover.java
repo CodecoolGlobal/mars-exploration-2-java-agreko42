@@ -15,12 +15,12 @@ public class Rover {
     private Inventory inventory;
 
 
-    public Rover(String id, Coordinate position, int sightRange, Routine currentRoutine) {
+    public Rover(String id, Coordinate position, int sightRange, Routine currentRoutine, int inventorySize) {
         this.id = id;
         this.position = position;
         this.sightRange = sightRange;
         this.currentRoutine = currentRoutine;
-        this.inventory = new Inventory();
+        this.inventory = new Inventory(inventorySize);
         this.interestingStuffIFound = new HashMap<>();
         this.visitedCoordinates = new ArrayList<>();
         visitedCoordinates.add(position);

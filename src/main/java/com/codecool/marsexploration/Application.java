@@ -5,22 +5,19 @@ import com.codecool.marsexploration.logic.ExplorationSimulator;
 import com.codecool.marsexploration.logic.phase.Phase;
 import com.codecool.marsexploration.logic.routine.RandomExplorationRoutine;
 import com.codecool.marsexploration.logic.routine.Routine;
-import com.codecool.marsexploration.logic.routine.TargetedMovementRoutine;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        long timeout = 600;
+        long timeout = 100;
         Coordinate landingSpot = new Coordinate(12, 12);
         Routine startingRoutine = new RandomExplorationRoutine();
         List<Rover> startingRovers = new ArrayList<>();
-        Rover opportunity = new Rover("Opportunity", landingSpot, 3, startingRoutine);
+        Rover opportunity = new Rover("Opportunity", landingSpot, 3, startingRoutine, 200);
         startingRovers.add(opportunity);
-
-        Routine targetRoutine = new TargetedMovementRoutine();
-        startingRovers.add(new Rover("roverlyDope", landingSpot, 3, startingRoutine));
+        startingRovers.add(new Rover("roverlyDope", landingSpot, 3, startingRoutine, 200));
 
         String[][] mapDummy = new String[100][100];
         mapDummy[8][12] = "*";
@@ -35,7 +32,9 @@ public class Application {
         int mineralsNeededForColonization = 3;
         int waterNeededForColonization = 2;
         int wantedNumberOfDepots = 2;
-        Context context = new Context(timeout, mapDummy, landingSpot, startingRovers, mineralsNeededForColonization, waterNeededForColonization, wantedNumberOfDepots);
+        int neededHousing = 3;
+        Outcome wantedOutcome = Outcome.READY_FOR_COLONISTS;
+        Context context = new Context(timeout, mapDummy, landingSpot, startingRovers, mineralsNeededForColonization, waterNeededForColonization, neededHousing, wantedNumberOfDepots, wantedOutcome);
 
 
         List<Phase> phaseList = new PhaseLoader().loadPhases();

@@ -2,7 +2,8 @@ package com.codecool.marsexploration.data;
 
 public enum Outcome {
     COLONIZABLE,
-    NOT_COLONIZABLE_RESOURCES,
+    STRUCTURES_BUILT,
+    READY_FOR_COLONISTS,
     TIMEOUT,
     WRONG_LANDING_COORDINATES
 }

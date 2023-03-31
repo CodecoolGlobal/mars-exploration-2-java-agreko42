@@ -5,10 +5,13 @@ import java.util.Map;
 
 public class Inventory {
 
-    private Map<Symbol, Integer> inventory;
-    private final int capacity = 200;
 
-    public Inventory() {
+
+    private Map<Symbol, Integer> inventory;
+    private final int capacity;
+
+    public Inventory(int capacity) {
+        this.capacity = capacity;
         this.inventory = new HashMap<>();
     }
 
@@ -22,15 +25,26 @@ public class Inventory {
            limitToCapacity(symbol);
        }
     }
-
-    public Integer getFromInventory(Symbol symbol) {
-        return inventory.get(symbol);
+    public int getCapacity() {
+        return capacity;
     }
-    public boolean isFull() {
-        int allContents = getInventoryCount();
-        return allContents >= capacity;
+    public int getFromInventory(Symbol symbol) {
+        if(inventory.get(symbol) != null){
+            return inventory.get(symbol);
+        }
+        else{ return 0; }
     }
+    public Map<Symbol, Integer> getInventory() {
+        return inventory;
+    }
+    public boolean isFull(Symbol symbol) {
+        boolean isFull = false;
+        if(inventory.get(symbol) != null) {
+            isFull = inventory.get(symbol) == capacity;
+        }
 
+        return isFull;
+    }
     private void limitToCapacity(Symbol symbol){
         if(inventory.get(symbol) >= capacity){
             inventory.put(symbol, capacity);
@@ -39,7 +53,6 @@ public class Inventory {
             inventory.put(symbol, 0);
         }
     }
-
     private int getInventoryCount(){
         return inventory.keySet().stream()
                 .map( symbol -> inventory.get(symbol) )
