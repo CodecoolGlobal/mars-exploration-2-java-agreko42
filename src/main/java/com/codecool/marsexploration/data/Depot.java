@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Depot {
+    //TODO: change access modifier
     public String id;
     public Coordinate location;
     public boolean isFull;

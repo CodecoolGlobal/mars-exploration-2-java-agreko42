@@ -13,10 +13,10 @@ public class TaskFactory {
     public void setCorrectTaskByOutcome(Context context, Rover rover) {
         Inventory roverInventory = rover.getInventory();
         Outcome outcome = context.getSimulationOutcome();
-        if(outcome == Outcome.COLONIZABLE){
+        if(outcome.equals(Outcome.COLONIZABLE)){
             setTaskForCOLONIZABLE(context, rover, roverInventory);
         }
-        else if(outcome == Outcome.STRUCTURES_BUILT){
+        else if(outcome.equals(Outcome.STRUCTURES_BUILT)){
             setTasksForSTRUCTURES_BUILT(context, rover, roverInventory);
         }
     }
@@ -37,6 +37,7 @@ public class TaskFactory {
             rover.setCurrentTask(new RoverTask(getLocationOfUnfilledDepot(context), Action.FILL_DEPOT));
         }
         else{
+            //TODO: Maybe better to create a chill task
             rover.setCurrentTask(null);
         }
     }

@@ -7,6 +7,7 @@ public class BuildDepotRoutine implements Routine {
     public void move(Context context, Rover rover) {
         RoverTask task = rover.getCurrentTask();
 
+        //TODO: Magic numbers
         if(task.getDuration() == 1){
             String id = "Depot " + (context.getDepots().size() +1);
             Coordinate location = task.getTarget();

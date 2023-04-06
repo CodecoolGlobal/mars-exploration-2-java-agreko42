@@ -16,12 +16,12 @@ public class PhaseLoader {
     public List<Phase> loadPhases () {
         List<Phase> phaseList = new ArrayList<>();
 
-        phaseList.add(loadRoutineEvaluation());
+        phaseList.add(loadRoutineEvaluation(new RoutineFactory()));
         phaseList.add(new Movement());
         phaseList.add(new Scan());
         phaseList.add(loadAnalyzers());
         phaseList.add(new Log());
-        phaseList.add(loadTaskManager());
+        phaseList.add(loadTaskManager(new TaskFactory()));
 
         phaseList.add(new StepIncrement()); //must be LAST
         return phaseList;
@@ -37,12 +37,11 @@ public class PhaseLoader {
         analysis.setAllAnalyzer(analyzers);
         return analysis;
     }
-    private RoutineEvaluation loadRoutineEvaluation(){
-        RoutineFactory actions = new RoutineFactory();
+    private RoutineEvaluation loadRoutineEvaluation(RoutineFactory actions){
         return new RoutineEvaluation(actions);
     }
-    private TaskManager loadTaskManager(){
-        TaskFactory tasks = new TaskFactory();
+
+    private TaskManager loadTaskManager(TaskFactory tasks){
         return new TaskManager(tasks);
     }
 }

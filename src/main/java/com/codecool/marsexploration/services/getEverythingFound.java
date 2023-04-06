@@ -17,7 +17,7 @@ public class getEverythingFound {
         context.getRovers().stream()
                 .peek(thisRover -> thisRover.getInterestingStuffIFound().keySet().stream()
                         .peek(key -> {
-                            allStuffFound.put(key, new HashSet<>());
+                            allStuffFound.put(key, new HashSet<>()); // TODO: avoid putting null here
                             allStuffFound.get(key).addAll(thisRover.getInterestingStuffIFound().get(key));
                         })
                         .collect(Collectors.toList()))

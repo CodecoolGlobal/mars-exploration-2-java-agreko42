@@ -21,12 +21,13 @@ public class TargetedMovementRoutine implements Routine{
         }
     }
     public int correctThisPosition(int target, int current ){
-        if(current > target){
-            current -= 1;
-        }
-        else if(current < target) {
-            current += 1;
-        }
-        return current;
+//        if(current > target){
+//            current -= 1;
+//        }
+//        else if(current < target) {
+//            current += 1;
+//        }
+//        return current;
+        return current > target? --current : ++current;
     }
 }
