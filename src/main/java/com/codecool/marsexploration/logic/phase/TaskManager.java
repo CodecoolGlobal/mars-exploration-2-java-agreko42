@@ -1,11 +1,7 @@
 package com.codecool.marsexploration.logic.phase;
 
 import com.codecool.marsexploration.data.*;
-import com.codecool.marsexploration.logic.getEverythingFound;
 import com.codecool.marsexploration.logic.routine.TaskFactory;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class TaskManager implements Phase{

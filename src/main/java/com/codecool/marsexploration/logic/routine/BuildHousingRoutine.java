@@ -15,8 +15,6 @@ public class BuildHousingRoutine implements Routine {
             System.out.println("HABITAT BUILT!!!");
         }
         task.decreaseDuration();
-        System.out.println("Action: " + task.getAction());
-        System.out.println("At: " + "X " + task.getTarget().x() + "  Y " + task.getTarget().y());
     }
 }
 

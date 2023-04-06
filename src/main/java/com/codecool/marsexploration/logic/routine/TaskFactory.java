@@ -1,7 +1,7 @@
 package com.codecool.marsexploration.logic.routine;
 
 import com.codecool.marsexploration.data.*;
-import com.codecool.marsexploration.logic.getEverythingFound;
+import com.codecool.marsexploration.services.getEverythingFound;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,18 +45,14 @@ public class TaskFactory {
     private void setTaskForCOLONIZABLE(Context context, Rover rover, Inventory inventory) {
         boolean enoughDepots = context.getDepots().size() >= context.getWANTED_NUMBER_OF_DEPOTS();
         boolean enoughHousing = context.getHousings().size() >= context.getNEEDED_HOUSING();
-        System.out.println("SETTING TASK ");
 
         if( inventory.getFromInventory(Symbol.MINERAL) < inventory.getCapacity() ) {
-            System.out.println("TO MINING");
             rover.setCurrentTask(new RoverTask(getResourceTarget(context, Symbol.MINERAL.getSymbol()), Action.MINE));
         }
         else if(!enoughHousing){
-            System.out.println("TO BUILDING HOUSE");
             rover.setCurrentTask(new RoverTask(getRandomFreeLocation(context), Action.BUILD_HABITAT));
         }
         else if(!enoughDepots){
-            System.out.println("TO BUILDING DEPOT");
             rover.setCurrentTask(new RoverTask(getRandomFreeLocation(context), Action.BUILD_DEPOT));
         }
 

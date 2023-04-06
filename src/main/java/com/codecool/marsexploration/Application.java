@@ -1,7 +1,6 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.*;
-import com.codecool.marsexploration.logic.ExplorationSimulator;
 import com.codecool.marsexploration.logic.phase.Phase;
 import com.codecool.marsexploration.logic.routine.RandomExplorationRoutine;
 import com.codecool.marsexploration.logic.routine.Routine;
@@ -17,7 +16,7 @@ public class Application {
         List<Rover> startingRovers = new ArrayList<>();
         Rover opportunity = new Rover("Opportunity", landingSpot, 3, startingRoutine, 200);
         startingRovers.add(opportunity);
-        startingRovers.add(new Rover("roverlyDope", landingSpot, 3, startingRoutine, 200));
+        startingRovers.add(new Rover("Perseverance", landingSpot, 3, startingRoutine, 200));
 
         String[][] mapDummy = new String[100][100];
         mapDummy[8][12] = "*";

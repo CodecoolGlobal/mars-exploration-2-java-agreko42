@@ -9,12 +9,9 @@ public class MiningRoutine implements Routine{
         RoverTask mining = rover.getCurrentTask();
         Inventory inventory = rover.getInventory();
 
-        System.out.println(mining.getDuration());
         if(mining.getDuration() > 0 && !inventory.isFull(Symbol.MINERAL)){
             inventory.addToInventory(Symbol.MINERAL, 40);
-            System.out.println(mining.getDuration());
         }
         mining.decreaseDuration();
-        System.out.println(rover.getInventory().getFromInventory(Symbol.MINERAL));
     }
 }

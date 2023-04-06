@@ -21,7 +21,6 @@ public class DepotFillingRoutine implements Routine {
 
         task.decreaseDuration();
 
-        System.out.println(depot.getFromInventory(Symbol.MINERAL));
-        System.out.println(depot.getFromInventory(Symbol.WATER));
+
     }
 }

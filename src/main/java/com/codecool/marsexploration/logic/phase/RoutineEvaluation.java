@@ -22,9 +22,6 @@ public class RoutineEvaluation implements Phase {
             }
             else {
                 actions.setAction(rover, Action.GO_TO_TARGET);
-
-                System.out.println(" TargetX: " + String.valueOf(task.getTarget().x()) + ";;; Current: " + String.valueOf(rover.getPosition().x()));
-                System.out.println(" TargetY: " + String.valueOf(task.getTarget().y()) + ";;; Current: " + String.valueOf(rover.getPosition().y()));
             }
         }
     }

@@ -2,17 +2,16 @@ package com.codecool.marsexploration.logic.phase;
 
 import com.codecool.marsexploration.data.*;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Objects;
+
 
 public class Log implements Phase{
     @Override
     public void perform(Context context, Rover rover) {
         String outputString = getOutputString(context, rover);
         try {
-            FileWriter filewriter = new FileWriter("src/main/resources/exploration-4.log", true);
+            FileWriter filewriter = new FileWriter("src/main/resources/exploration-5.log", true);
             for(int i = 0; i < outputString.length(); i++){
                 filewriter.write(outputString.charAt(i));
             }

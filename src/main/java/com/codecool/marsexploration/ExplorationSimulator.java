@@ -1,4 +1,4 @@
-package com.codecool.marsexploration.logic;
+package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.StepManager;
 import com.codecool.marsexploration.data.Context;
@@ -19,7 +19,6 @@ public class ExplorationSimulator {
     public void simulate(SimulationInput input) {
 
         while(context.getStepNumber() < context.getTimeout() || context.getSimulationOutcome() != context.getWANTED_OUTCOME()){
-            System.out.println(context.getStepNumber() + " ---------------------- ---------------- --------------");
             context.getRovers().stream()
                             .peek(currentRover -> manager.runAllPhases(context, currentRover))
                     .collect(Collectors.toList());

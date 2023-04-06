@@ -7,7 +7,6 @@ import com.codecool.marsexploration.data.Rover;
 public class TargetedMovementRoutine implements Routine{
     @Override
     public void move(Context context, Rover rover) {
-        System.out.println("TRYING TO MOVE TO TARGET");
         Coordinate target = rover.getCurrentTask().getTarget();
         int currentX = rover.getPosition().x();
         int currentY = rover.getPosition().y();
@@ -22,7 +21,6 @@ public class TargetedMovementRoutine implements Routine{
         }
     }
     public int correctThisPosition(int target, int current ){
-        System.out.println("Rover tries to correct");
         if(current > target){
             current -= 1;
         }
