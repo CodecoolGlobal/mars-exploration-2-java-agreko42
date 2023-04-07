@@ -1,7 +1,7 @@
 package com.codecool.marsexploration.logic.routine;
 
 import com.codecool.marsexploration.data.*;
-import com.codecool.marsexploration.services.getEverythingFound;
+import com.codecool.marsexploration.services.ItemService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,9 +22,6 @@ public class TaskFactory {
     }
 
     private void setTasksForSTRUCTURES_BUILT(Context context, Rover rover, Inventory roverInventory) {
-        long numberOfNonFullDepots = context.getDepots().stream()
-                .filter( depot -> !depot.isFull)
-                .count();
 
         boolean allDepotsFull = allDepotsFull(context);
         if( (roverInventory.getFromInventory(Symbol.MINERAL) < roverInventory.getCapacity()) ) {
@@ -37,15 +34,15 @@ public class TaskFactory {
             rover.setCurrentTask(new RoverTask(getLocationOfUnfilledDepot(context), Action.FILL_DEPOT));
         }
         else{
-            //TODO: Maybe better to create a chill task
+            //TODO: eMu: Nothing needs to be done means you won or?
             rover.setCurrentTask(null);
         }
     }
 
 
     private void setTaskForCOLONIZABLE(Context context, Rover rover, Inventory inventory) {
-        boolean enoughDepots = context.getDepots().size() >= context.getWANTED_NUMBER_OF_DEPOTS();
-        boolean enoughHousing = context.getHousings().size() >= context.getNEEDED_HOUSING();
+        boolean enoughDepots = context.getDepots().size() >= context.getDepotsNeeded();
+        boolean enoughHousing = context.getHousings().size() >= context.getHousingNeeded();
 
         if( inventory.getFromInventory(Symbol.MINERAL) < inventory.getCapacity() ) {
             rover.setCurrentTask(new RoverTask(getResourceTarget(context, Symbol.MINERAL.getSymbol()), Action.MINE));
@@ -56,6 +53,7 @@ public class TaskFactory {
         else if(!enoughDepots){
             rover.setCurrentTask(new RoverTask(getRandomFreeLocation(context), Action.BUILD_DEPOT));
         }
+        //TODO: eMu: else won?
 
     }
 
@@ -69,7 +67,7 @@ public class TaskFactory {
     }
 
     private Coordinate getRandomFreeLocation(Context context) {
-        Map<String, Set<Coordinate>> allStuffFound = new getEverythingFound().get(context);
+        Map<String, Set<Coordinate>> allStuffFound = new ItemService().getFoundItemsMap(context);
         List<Depot> depots= context.getDepots();
         List<Housing> housings = context.getHousings();
 
@@ -122,7 +120,7 @@ public class TaskFactory {
     }
 
     private Coordinate getResourceTarget(Context context, String symbol) {
-        Map<String, Set<Coordinate>> allStuffFound = new getEverythingFound().get(context);
+        Map<String, Set<Coordinate>> allStuffFound = new ItemService().getFoundItemsMap(context);
         return allStuffFound.get(symbol).stream().findAny().get();
     }
 }

@@ -11,8 +11,8 @@ public class StructuralAnalyzer implements Analyzer{
     @Override
     public void analyze(Context context, Map<String, Set<Coordinate>> stuffFound) {
 
-        boolean enoughHousing = context.getHousings().size() >= context.getNEEDED_HOUSING();
-        boolean enoughDepots = context.getDepots().size() >= context.getWANTED_NUMBER_OF_DEPOTS();
+        boolean enoughHousing = context.getHousings().size() >= context.getHousingNeeded();
+        boolean enoughDepots = context.getDepots().size() >= context.getDepotsNeeded();
 
         if(enoughDepots && enoughHousing){
             context.setSimulationOutcome(Outcome.STRUCTURES_BUILT);

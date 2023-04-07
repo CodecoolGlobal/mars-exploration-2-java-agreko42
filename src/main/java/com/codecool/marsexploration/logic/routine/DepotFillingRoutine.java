@@ -9,7 +9,7 @@ public class DepotFillingRoutine implements Routine {
         RoverTask task = rover.getCurrentTask();
         Inventory roverInventory = rover.getInventory();
         Inventory depot = context.getDepots().stream()
-                .filter( theDepot -> theDepot.getLocation() == rover.getCurrentTask().getTarget())
+                .filter( theDepot -> theDepot.getLocation().equals(rover.getCurrentTask().getTarget()))
                 .findFirst().get().getInventory();
 
 

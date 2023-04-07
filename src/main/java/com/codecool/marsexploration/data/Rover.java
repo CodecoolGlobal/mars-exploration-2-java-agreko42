@@ -9,6 +9,8 @@ public class Rover {
     private Coordinate position;
     private int sightRange;
     private Routine currentRoutine;
+    //TODO: eMu - Albert, dein interestingStuffFound besitzt keinen Aufruf einer Funktion
+    //TODO die dort irgendetwas hinzufügen würde. Diese ist einfach immer leer
     private Map<String, Set<Coordinate>> interestingStuffIFound;
     private List<Coordinate> visitedCoordinates;
     private RoverTask currentTask;
@@ -51,15 +53,7 @@ public class Rover {
     public Map<String, Set<Coordinate>> getInterestingStuffIFound() {
         return interestingStuffIFound;
     }
-    public void setInterestingStuffIFound(Map<String, Set<Coordinate>> interestingStuffIFound) {
-        this.interestingStuffIFound = interestingStuffIFound;
-    }
-    public List<Coordinate> getVisitedCoordinates() {
-        return visitedCoordinates;
-    }
-    public void setVisitedCoordinates(List<Coordinate> visitedCoordinates) {
-        this.visitedCoordinates = visitedCoordinates;
-    }
+
     public RoverTask getCurrentTask() {
         return currentTask;
     }

@@ -58,13 +58,7 @@ public class Scan implements Phase{
     }
 
     private int correctValueIntoBounds(int max, int value) {
-        if(value < 0){
-            value = 0;
-        }
-        else if (value >= max){
-           value = max;
-        }
-        return value;
+        return value < 0 ? 0 : value > max ? max : value;
     }
 
     private void rememberFoundStuff(Map<String, Set<Coordinate>> interestingStuff, Coordinate coordinate, String mapSymbol) {
@@ -72,8 +66,9 @@ public class Scan implements Phase{
             interestingStuff.get(mapSymbol).add(coordinate);
         }
         else {
-            interestingStuff.put(mapSymbol, new HashSet<>());
-            interestingStuff.get(mapSymbol).add(coordinate);
+            // eMu: Ahhhhhhhhhhh - hier füllst du deine Map über die Reference
+            // besser wenn du das über ein add oder put Funktion machst als die REferenz hier zu befüllen
+            interestingStuff.put(mapSymbol, new HashSet<>(Arrays.asList(coordinate)));
         }
     }
 }

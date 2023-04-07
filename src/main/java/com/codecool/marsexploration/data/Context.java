@@ -11,18 +11,11 @@ public class Context {
     private List<Rover> rovers;
     private List<Housing> housings;
     private List<Depot> depots;
-    private final int MINERALS_NEEDED_FOR_COLONIZATION;
-    private final int WATER_NEEDED_FOR_COLONIZATION;
-    private final int NEEDED_HOUSING;
-    private final int WANTED_NUMBER_OF_DEPOTS;
-    private final Outcome WANTED_OUTCOME;
+    private final ColonializationRequirments colonializationRequirments;
+
     private Outcome simulationOutcome;
-    public Context(long timeout, String[][] map, Coordinate landingCoordinate, List<Rover> rovers, int mineralsNeededForColonization, int waterNeededForColonization, int neededHousing, int wantedNumberOfDepots, Outcome wantedOutcome) {
-        MINERALS_NEEDED_FOR_COLONIZATION = mineralsNeededForColonization;
-        WATER_NEEDED_FOR_COLONIZATION = waterNeededForColonization;
-        NEEDED_HOUSING = neededHousing;
-        WANTED_NUMBER_OF_DEPOTS = wantedNumberOfDepots;
-        WANTED_OUTCOME = wantedOutcome;
+    public Context(long timeout, String[][] map, Coordinate landingCoordinate, List<Rover> rovers, ColonializationRequirments colonializationRequirments)  {
+        this.colonializationRequirments = colonializationRequirments;
         this.stepNumber = 0;
         this.timeout = timeout;
         this.map = map;
@@ -41,48 +34,37 @@ public class Context {
     public long getTimeout() {
         return timeout;
     }
-    public void setTimeout(long timeout) {
-        this.timeout = timeout;
-    }
     public String[][] getMap() {
         return map;
     }
     public void setMap(String[][] map) {
         this.map = map;
     }
-    public Coordinate getLandingCoordinate() {
-        return landingCoordinate;
-    }
-    public void setLandingCoordinate(Coordinate landingCoordinate) {
-        this.landingCoordinate = landingCoordinate;
-    }
-    public List<Rover> getRovers() {
-        return rovers;
-    }
-    public void addToRovers(Rover rover) {
-        this.rovers.add(rover);
-    }
     public List<Depot> getDepots() {
         return depots;
+    }
+
+    public List<Rover> getRovers() {
+        return rovers;
     }
 
     public List<Housing> getHousings() {
         return housings;
     }
-    public int getMINERALS_NEEDED_FOR_COLONIZATION() {
-        return MINERALS_NEEDED_FOR_COLONIZATION;
+    public int getMineralsNeeded() {
+        return colonializationRequirments.mineralsNeeded();
     }
-    public int getWATER_NEEDED_FOR_COLONIZATION() {
-        return WATER_NEEDED_FOR_COLONIZATION;
+    public int getWaterNeeded() {
+        return colonializationRequirments.waterNeeded();
     }
-    public int getWANTED_NUMBER_OF_DEPOTS() {
-        return WANTED_NUMBER_OF_DEPOTS;
+    public int getDepotsNeeded() {
+        return colonializationRequirments.numberDepots();
     }
-    public int getNEEDED_HOUSING() {
-        return NEEDED_HOUSING;
+    public int getHousingNeeded() {
+        return colonializationRequirments.numberHousing();
     }
-    public Outcome getWANTED_OUTCOME() {
-        return WANTED_OUTCOME;
+    public Outcome getWantedOutcome() {
+        return colonializationRequirments.outcome();
     }
     public Outcome getSimulationOutcome() {
         return simulationOutcome;

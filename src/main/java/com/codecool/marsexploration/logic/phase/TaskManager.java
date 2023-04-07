@@ -14,10 +14,11 @@ public class TaskManager implements Phase{
     @Override
     public void perform(Context context, Rover rover) {
 
+        //TODO: eMu - hiermusst du wieder auf null überprüfen, weil du im Moment null tasks zulässt
+        //TODO Die Gefahr dabei ist immer, dass du nicht unterscheiden könntest, ob das ein "korrekter
+        //TODO null task" wäre oder irgendwo in deinem Program etwas nicht richtig initialisiert wurde
         if(rover.getCurrentTask() != null && rover.getCurrentTask().getDuration() == 0){
             rover.setCurrentTask(null);
-        }
-        if(rover.getCurrentTask() == null ){
             tasks.setCorrectTaskByOutcome(context, rover);
         }
     }

@@ -12,7 +12,7 @@ public class RoutineEvaluation implements Phase {
     @Override
     public void perform(Context context, Rover rover) {
         RoverTask task = rover.getCurrentTask();
-        if(task == null){
+        if(task == null){ // TODO: you are doing a null check because you allow to set null tasks in your task factory class - better do an explore task
             actions.setAction(rover, Action.EXPLORE);
         }
         else{

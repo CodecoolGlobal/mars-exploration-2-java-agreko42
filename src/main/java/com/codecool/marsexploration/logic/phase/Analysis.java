@@ -4,7 +4,7 @@ import com.codecool.marsexploration.data.Context;
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Rover;
 import com.codecool.marsexploration.logic.analyzer.Analyzer;
-import com.codecool.marsexploration.services.getEverythingFound;
+import com.codecool.marsexploration.services.ItemService;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class Analysis implements Phase{
     @Override
     public void perform(Context context, Rover rover) {
 
-        Map<String, Set<Coordinate>> allStuffFound = new getEverythingFound().get(context);
+        Map<String, Set<Coordinate>> allStuffFound = new ItemService().getFoundItemsMap(context);
         for(Analyzer analyzer : allAnalyzer){
             analyzer.analyze(context, allStuffFound);
         }

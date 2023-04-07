@@ -13,8 +13,8 @@ public class ReadyForColonistsAnalyzer implements Analyzer{
                 .count();
 
         boolean depotsAreFull = allDepotsFull(context);
-        boolean enoughDepots = context.getDepots().size() >= context.getWANTED_NUMBER_OF_DEPOTS();
-        boolean enoughHousing = context.getHousings().size() >= context.getNEEDED_HOUSING();
+        boolean enoughDepots = context.getDepots().size() >= context.getDepotsNeeded();
+        boolean enoughHousing = context.getHousings().size() >= context.getHousingNeeded();
 
             if(depotsAreFull && enoughDepots && enoughHousing) {
                 context.setSimulationOutcome(Outcome.READY_FOR_COLONISTS);
